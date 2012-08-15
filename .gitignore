@@ -1,0 +1,7 @@
+# Sqlite databases
+*.sql
+*.db
+
+# Editor shit files
+*swp
+*~
