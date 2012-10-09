@@ -1,7 +1,7 @@
 module Rubaiji
   class Result
     attr_reader :id, :link, :rank, :old_rank, :summary,
-                :status, :images, :smart, :keywords
+                :status, :images, :smart, :keywords, :title
     attr_accessor :videos
 
     def initialize(params)
@@ -9,11 +9,19 @@ module Rubaiji
         instance_variable_set("@#{k}", v) unless v.nil? or k == "videos"
       end
 
-      _res = JSON.parse("\{\"videos\": #{params["videos"]}\}")
       self.videos = []
+      params["videos"] = params["videos"].gsub('\'', '"')
+      _res = JSON.parse("\{\"videos\": #{params["videos"]}\}")
+
+      if _res["videos"].class == String
+        _res["videos"] = JSON.parse(_res["videos"])
+      end
+
       _res["videos"].each do |video|
         self.videos << Rubaiji::Video.new(video)
       end
+      #rescue
+      #end
     end
 
     def old?

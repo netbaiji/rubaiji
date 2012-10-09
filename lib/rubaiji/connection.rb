@@ -1,7 +1,7 @@
 module Rubaiji
   class Connection
     attr_reader :api_id, :api_key, :format
-    API_URL = "http://localhost:8000"
+    API_URL = "http://netbaiji.com"
     REPORT_INDEX_URL = "/api/v2/report/"
 
     def initialize(params)

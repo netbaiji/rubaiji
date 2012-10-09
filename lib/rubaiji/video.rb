@@ -1,6 +1,6 @@
 module Rubaiji
   class Video
-    attr_accessor :embed
+    attr_accessor :html
 
     def initialize(params)
       params.each do |k, v|
